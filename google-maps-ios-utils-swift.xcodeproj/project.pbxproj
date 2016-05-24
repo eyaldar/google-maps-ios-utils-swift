@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		257623111CF46B0800ABAEAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257623101CF46B0800ABAEAE /* AppDelegate.swift */; };
 		257623131CF46B0800ABAEAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257623121CF46B0800ABAEAE /* ViewController.swift */; };
-		257623161CF46B0800ABAEAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257623141CF46B0800ABAEAE /* Main.storyboard */; };
 		257623181CF46B0800ABAEAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257623171CF46B0800ABAEAE /* Assets.xcassets */; };
 		2576231B1CF46B0800ABAEAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257623191CF46B0800ABAEAE /* LaunchScreen.storyboard */; };
 		257623361CF4782B00ABAEAE /* GQTBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257623311CF4782B00ABAEAE /* GQTBounds.swift */; };
@@ -28,6 +27,7 @@
 		257623581CF4A64000ABAEAE /* GClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257623571CF4A64000ABAEAE /* GClusterRenderer.swift */; };
 		2576235C1CF4AC1000ABAEAE /* GDefaultClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2576235B1CF4AC1000ABAEAE /* GDefaultClusterRenderer.swift */; };
 		2576235E1CF4AECA00ABAEAE /* GDefaultClusterMarkerIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2576235D1CF4AECA00ABAEAE /* GDefaultClusterMarkerIconView.swift */; };
+		257623611CF4B09000ABAEAE /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257623601CF4B09000ABAEAE /* Spot.swift */; };
 		CACFF0592DD82B697C0EA4EF /* Pods_google_maps_ios_utils_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D62560206B1A1442747B064 /* Pods_google_maps_ios_utils_swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +35,6 @@
 		2576230D1CF46B0800ABAEAE /* google-maps-ios-utils-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "google-maps-ios-utils-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		257623101CF46B0800ABAEAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		257623121CF46B0800ABAEAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		257623151CF46B0800ABAEAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		257623171CF46B0800ABAEAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2576231A1CF46B0800ABAEAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2576231C1CF46B0800ABAEAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,6 +54,7 @@
 		257623571CF4A64000ABAEAE /* GClusterRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GClusterRenderer.swift; path = Clustering/View/GClusterRenderer.swift; sourceTree = "<group>"; };
 		2576235B1CF4AC1000ABAEAE /* GDefaultClusterRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GDefaultClusterRenderer.swift; path = Clustering/View/GDefaultClusterRenderer.swift; sourceTree = "<group>"; };
 		2576235D1CF4AECA00ABAEAE /* GDefaultClusterMarkerIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GDefaultClusterMarkerIconView.swift; path = "../TBAnnotationClustering-Google/TBAnnotationClustering-Swift/GDefaultClusterMarkerIconView.swift"; sourceTree = "<group>"; };
+		257623601CF4B09000ABAEAE /* Spot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Spot.swift; path = Markers/Spot.swift; sourceTree = "<group>"; };
 		3544650ACEDC36068A9AA648 /* Pods-google-maps-ios-utils-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-maps-ios-utils-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-google-maps-ios-utils-swift/Pods-google-maps-ios-utils-swift.release.xcconfig"; sourceTree = "<group>"; };
 		44C4357D6482D731C9ADC662 /* Pods-google-maps-ios-utils-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-maps-ios-utils-swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-google-maps-ios-utils-swift/Pods-google-maps-ios-utils-swift.debug.xcconfig"; sourceTree = "<group>"; };
 		9D62560206B1A1442747B064 /* Pods_google_maps_ios_utils_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_google_maps_ios_utils_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,9 +96,9 @@
 		2576230F1CF46B0800ABAEAE /* google-maps-ios-utils-swift */ = {
 			isa = PBXGroup;
 			children = (
+				2576235F1CF4B07600ABAEAE /* Markers */,
 				257623101CF46B0800ABAEAE /* AppDelegate.swift */,
 				257623121CF46B0800ABAEAE /* ViewController.swift */,
-				257623141CF46B0800ABAEAE /* Main.storyboard */,
 				257623171CF46B0800ABAEAE /* Assets.xcassets */,
 				257623191CF46B0800ABAEAE /* LaunchScreen.storyboard */,
 				2576231C1CF46B0800ABAEAE /* Info.plist */,
@@ -157,6 +157,14 @@
 				257623491CF48D4400ABAEAE /* SphericalMercatorProjection.swift */,
 			);
 			name = Projection;
+			sourceTree = "<group>";
+		};
+		2576235F1CF4B07600ABAEAE /* Markers */ = {
+			isa = PBXGroup;
+			children = (
+				257623601CF4B09000ABAEAE /* Spot.swift */,
+			);
+			name = Markers;
 			sourceTree = "<group>";
 		};
 		9BAF919310103D699414E9D7 /* Pods */ = {
@@ -239,7 +247,6 @@
 			files = (
 				2576231B1CF46B0800ABAEAE /* LaunchScreen.storyboard in Resources */,
 				257623181CF46B0800ABAEAE /* Assets.xcassets in Resources */,
-				257623161CF46B0800ABAEAE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +315,7 @@
 				2576233C1CF4880300ABAEAE /* GClusterAlgorithm.swift in Sources */,
 				257623451CF48AD600ABAEAE /* GCluster.swift in Sources */,
 				257623471CF48AF200ABAEAE /* GClusterItem.swift in Sources */,
+				257623611CF4B09000ABAEAE /* Spot.swift in Sources */,
 				2576235E1CF4AECA00ABAEAE /* GDefaultClusterMarkerIconView.swift in Sources */,
 				257623541CF499A100ABAEAE /* NonHierarchicalDistanceBasedAlgorithm.swift in Sources */,
 				257623111CF46B0800ABAEAE /* AppDelegate.swift in Sources */,
@@ -322,14 +330,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		257623141CF46B0800ABAEAE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				257623151CF46B0800ABAEAE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		257623191CF46B0800ABAEAE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
