@@ -111,8 +111,8 @@ class GQTPointQuadTreeChild: NSObject {
      * @return The results of the search.
      */
     func search(searchBounds: GQTBounds,
-                ownBounds: GQTBounds) -> [GQTPointQuadTreeItem] {
-        var results: [GQTPointQuadTreeItem]!
+                ownBounds: GQTBounds) -> NSArray {
+        var results: NSArray!
         
         if let `_topRight` = _topRight {
             let topRightBounds = GQTPointQuadTreeChild.boundsTopRightChildQuadBounds(ownBounds)
@@ -136,15 +136,17 @@ class GQTPointQuadTreeChild: NSObject {
                 results = _bottomLeft?.search(searchBounds, ownBounds: topRightBounds)
             }
         } else {
-            results = []
+            let array = NSMutableArray()
             
             for item in _items {
                 let point = item.point
                 
                 if searchBounds.contains(point) {
-                    results.append(item)
+                    array.addObject(item)
                 }
             }
+            
+            results = array
         }
         
         return results

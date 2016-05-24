@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
+protocol GClusterAlgorithm {
+    func addItem(item: GClusterItem)
+    func removeItems()
+    func removeItemsNotInRectangle(rect: CGRect)
+    
+    func getClusters(zoom: Double) -> NSSet
+}
