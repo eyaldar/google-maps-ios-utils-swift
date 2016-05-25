@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GQTPointQuadTree {
+final class GQTPointQuadTree {
     private var _bounds: GQTBounds
     private var _root: GQTPointQuadTreeChild!
     private var _count: Int = 0

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GQTPointQuadTreeChild: NSObject {
+final class GQTPointQuadTreeChild: NSObject {
     
     let kMaxElements = 64
     let kMaxDepth = 30

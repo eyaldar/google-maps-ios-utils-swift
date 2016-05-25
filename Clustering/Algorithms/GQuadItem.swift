@@ -13,6 +13,7 @@ import GoogleMaps
 class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
     private var _item: GClusterItem
     private var _point: GQTPoint
+    private var _pointClass: QuadItemPoint
     private var _position: CLLocationCoordinate2D
     private var _marker: GMSMarker
     
@@ -47,6 +48,7 @@ class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
         
         _position = clusterItem.position
         _point = projection.coordinateToPoint(_position)
+        _pointClass = QuadItemPoint(x: _point.x, y: _point.y)
         _item = clusterItem
         _marker = clusterItem.marker
     }
@@ -60,9 +62,10 @@ class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
     }
     
     func isEqual(quadItem other: GQuadItem) -> Bool {
+        
         return _item.isEqual(other._item) &&
-            _point.x == other.point.x &&
-            _point.y == other.point.y
+            _pointClass.x == other._pointClass.x &&
+            _pointClass.y == other._pointClass.y
     }
     
     override func isEqual(other: AnyObject?) -> Bool {

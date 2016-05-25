@@ -14,7 +14,3 @@ protocol GClusterItem: class, NSObjectProtocol {
     var position: CLLocationCoordinate2D { get }
     var marker: GMSMarker { get set }
 }
-
-func ==(lhs: GClusterItem, rhs: GClusterItem) -> Bool {
-    return lhs == rhs
-}

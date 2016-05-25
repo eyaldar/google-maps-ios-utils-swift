@@ -36,12 +36,10 @@ class ViewController: UIViewController {
         _mapView.delegate = _clusterManager
         _clusterManager.delegate = self
         
-        for _ in 0...10000 {
+        for _ in 0...20000 {
             let spot = generateSpot()
             _clusterManager.addItem(spot)
         }
-        
-        _clusterManager.cluster()
     }
     
     func generateSpot() -> Spot {

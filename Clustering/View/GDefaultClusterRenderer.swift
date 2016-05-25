@@ -9,7 +9,7 @@
 import Foundation
 import GoogleMaps
 
-class GDefaultClusterRenderer: GClusterRenderer {
+final class GDefaultClusterRenderer: GClusterRenderer {
     private let _mapView: GMSMapView
     private var _markerCache: [GMSMarker]
     private var _markerStack: Stack<GMSMarker>

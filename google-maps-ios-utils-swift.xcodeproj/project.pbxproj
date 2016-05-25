@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		254FB76B1CF588BA00A74173 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254FB76A1CF588BA00A74173 /* Stack.swift */; };
+		254FB76D1CF5BDFD00A74173 /* QuadItemPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254FB76C1CF5BDFD00A74173 /* QuadItemPoint.swift */; };
 		257623111CF46B0800ABAEAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257623101CF46B0800ABAEAE /* AppDelegate.swift */; };
 		257623131CF46B0800ABAEAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257623121CF46B0800ABAEAE /* ViewController.swift */; };
 		257623181CF46B0800ABAEAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257623171CF46B0800ABAEAE /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		254FB76A1CF588BA00A74173 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = "Data Structures/Stack.swift"; sourceTree = "<group>"; };
+		254FB76C1CF5BDFD00A74173 /* QuadItemPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuadItemPoint.swift; sourceTree = "<group>"; };
 		2576230D1CF46B0800ABAEAE /* google-maps-ios-utils-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "google-maps-ios-utils-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		257623101CF46B0800ABAEAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		257623121CF46B0800ABAEAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				2576233B1CF4880300ABAEAE /* GClusterAlgorithm.swift */,
+				254FB76C1CF5BDFD00A74173 /* QuadItemPoint.swift */,
 				2576233F1CF4897800ABAEAE /* GQuadItem.swift */,
 				2576234D1CF4996E00ABAEAE /* GStaticCluster.swift */,
 				257623531CF499A100ABAEAE /* NonHierarchicalDistanceBasedAlgorithm.swift */,
@@ -327,6 +330,7 @@
 				257623451CF48AD600ABAEAE /* GCluster.swift in Sources */,
 				257623471CF48AF200ABAEAE /* GClusterItem.swift in Sources */,
 				257623611CF4B09000ABAEAE /* Spot.swift in Sources */,
+				254FB76D1CF5BDFD00A74173 /* QuadItemPoint.swift in Sources */,
 				2576235E1CF4AECA00ABAEAE /* GDefaultClusterMarkerIconView.swift in Sources */,
 				257623541CF499A100ABAEAE /* NonHierarchicalDistanceBasedAlgorithm.swift in Sources */,
 				257623111CF46B0800ABAEAE /* AppDelegate.swift in Sources */,
@@ -447,6 +451,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eyaldar.google-maps-ios-utils-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -459,6 +464,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eyaldar.google-maps-ios-utils-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};

@@ -10,7 +10,8 @@ import Foundation
 import GoogleMaps
 import UIKit
 
-class GClusterManger: NSObject {
+final class GClusterManger: NSObject {
+    private var _currentClusterId = 0
     private var _previousCameraPosition: GMSCameraPosition?
     weak var delegate: GMSMapViewDelegate?
     var items: NSMutableArray?
@@ -52,8 +53,22 @@ class GClusterManger: NSObject {
     }
     
     func cluster() {
-        let clusters = clusterAlgorithm.getClusters(Double(mapView.camera.zoom))
-        clusterRenderer.clustersChanged(clusters)
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        let zoom = Double(mapView.camera.zoom)
+        let visibleBounds = translateMapViewVisibleBoundsToGQTBounds()
+        _currentClusterId += 1
+        let clusterId = _currentClusterId
+        
+        dispatch_async(dispatch_get_global_queue(priority, 0)) { [unowned self] in
+            self.removeItemsNotInBounds(visibleBounds)
+            let clusters = self.clusterAlgorithm.getClusters(zoom)
+            
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                if clusterId == self._currentClusterId {
+                    self.clusterRenderer.clustersChanged(clusters)
+                }
+            }
+        }
     }
     
     private func gmsBoundsToGQTBounds(gmsBounds: GMSCoordinateBounds) -> GQTBounds {
@@ -65,11 +80,12 @@ class GClusterManger: NSObject {
         return GQTBounds(minX: minLat, minY: minLong, maxX: maxLat, maxY: maxLong)
     }
     
-    private func removeItemsNotInVisibleRegion() {
+    private func translateMapViewVisibleBoundsToGQTBounds() -> GQTBounds {
         let visibleRegion = mapView.projection.visibleRegion()
         let gmsBounds = GMSCoordinateBounds(region: visibleRegion)
         let visibleBounds = gmsBoundsToGQTBounds(gmsBounds)
-        self.removeItemsNotInBounds(visibleBounds)
+        
+        return visibleBounds
     }
 }
 
@@ -96,8 +112,6 @@ extension GClusterManger: GMSMapViewDelegate {
         
         _previousCameraPosition = mapView.camera
         
-        
-        self.removeItemsNotInVisibleRegion()
         self.cluster()
         
         delegate?.mapView?(mapView, idleAtCameraPosition: position)

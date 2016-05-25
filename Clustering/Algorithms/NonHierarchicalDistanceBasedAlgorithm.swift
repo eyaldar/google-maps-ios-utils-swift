@@ -9,7 +9,7 @@
 import Foundation
 import GoogleMaps
 
-class NonHierarchicalDistanceBasedAlgorithm: GClusterAlgorithm {
+final class NonHierarchicalDistanceBasedAlgorithm: GClusterAlgorithm {
     private var _quadTree: GQTPointQuadTree
     private var _maxDistanceAtZoom: Int
     
