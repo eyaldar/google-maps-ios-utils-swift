@@ -98,7 +98,8 @@ class GQTPointQuadTree {
      *         of GQTPointQuadTreeItem.
      */
     func search(bounds: GQTBounds) -> NSArray {
-        let results = _root.search(bounds, ownBounds: _bounds)
+        let results = NSMutableArray()
+        _root.search(bounds, ownBounds: _bounds, accumlator: results)
         return results
     }
 }

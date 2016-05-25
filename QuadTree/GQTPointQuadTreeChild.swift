@@ -25,7 +25,7 @@ class GQTPointQuadTreeChild: NSObject {
     * Items in this PointQuadTree node, if this node has yet to be split. If we have items, children
     * will be nil, likewise, if we have children then items_ will be nil.
     */
-    private var _items: [GQTPointQuadTreeItem]
+    private var _items: [GQTPointQuadTreeItem]?
     
     override init() {
         _items = []
@@ -41,7 +41,7 @@ class GQTPointQuadTreeChild: NSObject {
     func add(item: GQTPointQuadTreeItem,
              withOwnBounds bounds: GQTBounds,
              atDepth depth: Int) {
-        if _items.count > kMaxElements && depth < kMaxDepth {
+        if let items = _items where items.count >= kMaxElements && depth < kMaxDepth {
             self.split(bounds, atDepth: depth)
         }
         
@@ -63,7 +63,7 @@ class GQTPointQuadTreeChild: NSObject {
                 }
             }
         } else {
-            _items.append(item)
+            _items!.append(item)
         }
     }
     
@@ -95,8 +95,8 @@ class GQTPointQuadTreeChild: NSObject {
             }
         }
         
-        if let index = _items.indexOf({ $0 == item }) {
-            _items.removeAtIndex(index)
+        if let index = _items!.indexOf({ $0 == item }) {
+            _items!.removeAtIndex(index)
             return true
         }
         
@@ -111,9 +111,8 @@ class GQTPointQuadTreeChild: NSObject {
      * @return The results of the search.
      */
     func search(searchBounds: GQTBounds,
-                ownBounds: GQTBounds) -> NSArray {
-        var results: NSArray!
-        
+                ownBounds: GQTBounds,
+                accumlator: NSMutableArray) {
         if let `_topRight` = _topRight {
             let topRightBounds = GQTPointQuadTreeChild.boundsTopRightChildQuadBounds(ownBounds)
             let topLeftBounds = GQTPointQuadTreeChild.boundsTopLeftChildQuadBounds(ownBounds)
@@ -121,35 +120,29 @@ class GQTPointQuadTreeChild: NSObject {
             let bottomLeftBounds = GQTPointQuadTreeChild.boundsBottomLeftChildQuadBounds(ownBounds)
             
             if topRightBounds.intersectsWith(searchBounds) {
-                results = _topRight.search(searchBounds, ownBounds: topRightBounds)
+                _topRight.search(searchBounds, ownBounds: topRightBounds, accumlator: accumlator)
             }
             
             if topLeftBounds.intersectsWith(searchBounds) {
-                results = _topLeft?.search(searchBounds, ownBounds: topRightBounds)
+                _topLeft?.search(searchBounds, ownBounds: topLeftBounds, accumlator: accumlator)
             }
             
             if bottomRightBounds.intersectsWith(searchBounds) {
-                results = _bottomRight?.search(searchBounds, ownBounds: topRightBounds)
+                _bottomRight?.search(searchBounds, ownBounds: bottomRightBounds, accumlator: accumlator)
             }
             
             if bottomLeftBounds.intersectsWith(searchBounds) {
-                results = _bottomLeft?.search(searchBounds, ownBounds: topRightBounds)
+                _bottomLeft?.search(searchBounds, ownBounds: bottomLeftBounds, accumlator: accumlator)
             }
         } else {
-            let array = NSMutableArray()
-            
-            for item in _items {
+            for item in _items! {
                 let point = item.point
                 
                 if searchBounds.contains(point) {
-                    array.addObject(item)
+                    accumlator.addObject(item)
                 }
             }
-            
-            results = array
         }
-        
-        return results
     }
     
     /**
@@ -158,12 +151,15 @@ class GQTPointQuadTreeChild: NSObject {
      * @return The results of the search.
      */
     func split(ownBounds: GQTBounds, atDepth depth: Int) {
+        assert(_items != nil)
+        
         _topRight       = GQTPointQuadTreeChild()
         _topLeft        = GQTPointQuadTreeChild()
         _bottomRight    = GQTPointQuadTreeChild()
         _bottomLeft     = GQTPointQuadTreeChild()
         
-        let items = self._items
+        let items = _items!
+        self._items = nil
         
         for item in items {
             self.add(item, withOwnBounds: ownBounds, atDepth: depth)
@@ -201,7 +197,7 @@ extension GQTPointQuadTreeChild {
         
         let minX = midPoint.x
         let minY = parentBounds.minY
-        let maxX = parentBounds.maxY
+        let maxX = parentBounds.maxX
         let maxY = midPoint.y
         
         return GQTBounds(minX: minX, minY: minY, maxX: maxX, maxY: maxY)

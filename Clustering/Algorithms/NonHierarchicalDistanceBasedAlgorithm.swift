@@ -127,8 +127,8 @@ class NonHierarchicalDistanceBasedAlgorithm: GClusterAlgorithm {
         let halfSpan = span / 2
         
         return GQTBounds(minX: point.x - halfSpan,
-                         minY: point.x + halfSpan,
-                         maxX: point.y - halfSpan,
+                         minY: point.y - halfSpan,
+                         maxX: point.x + halfSpan,
                          maxY: point.y + halfSpan)
     }
 }

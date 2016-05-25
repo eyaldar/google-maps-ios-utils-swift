@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         srand48(time(nil))
         
-        GMSServices.provideAPIKey("")
+        GMSServices.provideAPIKey("YOUR_TOKEN_HERE")
         
         let viewController = ViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
