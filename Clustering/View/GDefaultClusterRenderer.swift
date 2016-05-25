@@ -12,11 +12,13 @@ import GoogleMaps
 final class GDefaultClusterRenderer: GClusterRenderer {
     private let _mapView: GMSMapView
     private var _markerCache: [GMSMarker]
+    private var _nonClusterMarkerCache: [GMSMarker]
     private var _markerStack: Stack<GMSMarker>
     
     init(mapView: GMSMapView) {
         _mapView = mapView
         _markerCache = []
+        _nonClusterMarkerCache = []
         _markerStack = Stack<GMSMarker>()
     }
     
@@ -26,26 +28,27 @@ final class GDefaultClusterRenderer: GClusterRenderer {
             _markerStack.push(marker)
         }
         
+        clearCaches()
+        
         for cluster in clusters {
             guard let `cluster` = cluster as? GCluster else {
                 continue
             }
             
-            let marker = getMarker()
-
-            _markerCache.append(marker)
-            
+            var marker: GMSMarker!
             let count = cluster.items.count
             
             if count > 1 {
+                marker = getMarker()
                 createOrUpdateIconView(marker, count: count)
+                _markerCache.append(marker)
             } else {
-                marker.iconView = UIImageView(image: GMSMarker.markerImageWithColor(UIColor ( red: 0.4357, green: 0.6655, blue: 0.74, alpha: 1.0 )))
+                marker = cluster.marker
+                _nonClusterMarkerCache.append(cluster.marker)
             }
             
             marker.title = cluster.marker.title
             marker.appearAnimation = kGMSMarkerAnimationPop
-            marker.userData = cluster.marker.userData
             marker.position = cluster.marker.position
             marker.tracksViewChanges = false
             marker.map = _mapView
@@ -74,5 +77,21 @@ final class GDefaultClusterRenderer: GClusterRenderer {
         } else {
             marker.iconView = generateClusterIconWithCount(count)
         }
+    }
+    
+    private func clearCaches() {
+        for marker in _markerCache {
+            marker.map = nil
+            
+            _markerStack.push(marker)
+        }
+        
+        _markerCache.removeAll()
+        
+        for marker in _nonClusterMarkerCache {
+            marker.map = nil
+        }
+        
+        _nonClusterMarkerCache.removeAll()
     }
 }
