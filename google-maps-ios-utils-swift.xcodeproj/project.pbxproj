@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		254FB76B1CF588BA00A74173 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254FB76A1CF588BA00A74173 /* Stack.swift */; };
 		254FB79B1CF5CC2100A74173 /* QuadItemPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254FB79A1CF5CC2100A74173 /* QuadItemPoint.swift */; };
-		254FB79F1CF5CD2B00A74173 /* GDefaultClusterMarkerIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254FB79E1CF5CD2B00A74173 /* GDefaultClusterMarkerIconView.swift */; };
+		254FB7A31CF5CDCD00A74173 /* GDefaultClusterMarkerIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254FB7A21CF5CDCD00A74173 /* GDefaultClusterMarkerIconView.swift */; };
 		257623111CF46B0800ABAEAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257623101CF46B0800ABAEAE /* AppDelegate.swift */; };
 		257623131CF46B0800ABAEAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257623121CF46B0800ABAEAE /* ViewController.swift */; };
 		257623181CF46B0800ABAEAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257623171CF46B0800ABAEAE /* Assets.xcassets */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		254FB76A1CF588BA00A74173 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = "Data Structures/Stack.swift"; sourceTree = "<group>"; };
 		254FB79A1CF5CC2100A74173 /* QuadItemPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuadItemPoint.swift; path = Clustering/Algorithms/QuadItemPoint.swift; sourceTree = "<group>"; };
-		254FB79E1CF5CD2B00A74173 /* GDefaultClusterMarkerIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDefaultClusterMarkerIconView.swift; sourceTree = "<group>"; };
+		254FB7A21CF5CDCD00A74173 /* GDefaultClusterMarkerIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GDefaultClusterMarkerIconView.swift; path = Clustering/View/GDefaultClusterMarkerIconView.swift; sourceTree = "<group>"; };
 		2576230D1CF46B0800ABAEAE /* google-maps-ios-utils-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "google-maps-ios-utils-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		257623101CF46B0800ABAEAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		257623121CF46B0800ABAEAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			children = (
 				257623571CF4A64000ABAEAE /* GClusterRenderer.swift */,
 				2576235B1CF4AC1000ABAEAE /* GDefaultClusterRenderer.swift */,
-				254FB79E1CF5CD2B00A74173 /* GDefaultClusterMarkerIconView.swift */,
+				254FB7A21CF5CDCD00A74173 /* GDefaultClusterMarkerIconView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -336,7 +336,7 @@
 				257623381CF4782B00ABAEAE /* GQTPointQuadTree.swift in Sources */,
 				2576234E1CF4996E00ABAEAE /* GStaticCluster.swift in Sources */,
 				254FB76B1CF588BA00A74173 /* Stack.swift in Sources */,
-				254FB79F1CF5CD2B00A74173 /* GDefaultClusterMarkerIconView.swift in Sources */,
+				254FB7A31CF5CDCD00A74173 /* GDefaultClusterMarkerIconView.swift in Sources */,
 				257623361CF4782B00ABAEAE /* GQTBounds.swift in Sources */,
 				257623371CF4782B00ABAEAE /* GQTPoint.swift in Sources */,
 				257623391CF4782B00ABAEAE /* GQTPointQuadTreeChild.swift in Sources */,
