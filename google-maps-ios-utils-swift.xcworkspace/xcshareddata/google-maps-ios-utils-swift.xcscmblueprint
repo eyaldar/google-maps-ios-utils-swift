@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4C908967BACA13855548D3EDB7D9DA28B6E60CE4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4C908967BACA13855548D3EDB7D9DA28B6E60CE4" : 0,
+    "FAEB27244E079D025779471FA0AC9FFA630116EA" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "136291F7-6A98-4DE3-B927-27E94E29BFB2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4C908967BACA13855548D3EDB7D9DA28B6E60CE4" : "google-maps-ios-utils-swift\/",
+    "FAEB27244E079D025779471FA0AC9FFA630116EA" : "TBAnnotationClustering-Google\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "google-maps-ios-utils-swift",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "google-maps-ios-utils-swift.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eyaldar\/google-maps-ios-utils-swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4C908967BACA13855548D3EDB7D9DA28B6E60CE4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eyaldar\/TBAnnotationClustering.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FAEB27244E079D025779471FA0AC9FFA630116EA"
+    }
+  ]
+}

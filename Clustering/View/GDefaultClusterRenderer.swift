@@ -44,6 +44,7 @@ final class GDefaultClusterRenderer: GClusterRenderer {
             }
             
             marker.title = cluster.marker.title
+            marker.appearAnimation = kGMSMarkerAnimationPop
             marker.userData = cluster.marker.userData
             marker.position = cluster.marker.position
             marker.tracksViewChanges = false
