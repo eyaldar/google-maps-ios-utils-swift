@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import GoogleMaps
 
-protocol GClusterItem: class, NSObjectProtocol {
+protocol GClusterItem: NSObjectProtocol {
+    var id: String { get }
     var position: CLLocationCoordinate2D { get }
-    var marker: GMSMarker { get set }
 }

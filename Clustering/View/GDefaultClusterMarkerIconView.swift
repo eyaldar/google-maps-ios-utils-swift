@@ -11,14 +11,15 @@ import UIKit
 
 final class GDefaultClusterMarkerIconView: UIView {
     
-    let TBScaleFactorAlpha:Float = 0.3
-    let TBScaleFactorBeta:Float = 0.4
+    static let TBScaleFactorAlpha:Float = 0.3
+    static let TBScaleFactorBeta:Float = 0.4
     
     private var count:Int?
     private var countLabel:UILabel?
     
     init(count: Int) {
-        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let size = CGFloat(roundf(GDefaultClusterMarkerIconView.TBScaledValueForValue(Float(count), multiplier: 44.0)))
+        super.init(frame: CGRect(origin: CGPointZero, size: CGSize(width: size, height: size)))
         
         initialize(count)
     }
@@ -48,11 +49,6 @@ final class GDefaultClusterMarkerIconView: UIView {
         setCount(count)
     }
     
-    func TBScaledValueForValue(value:Float, multiplier:Float) -> Float {
-        // Multiplier * (1/e^(-Alpha * X^(Beta)))
-        return multiplier * (1.0 / (1.0 + expf(-1 * TBScaleFactorAlpha * powf(value, TBScaleFactorBeta))))
-    }
-    
     func TBCenterRect(rect:CGRect, center: CGPoint) -> CGRect {
         let r = CGRect(x: center.x - rect.size.width/2.0, y: center.y - rect.size.height/2.0, width: rect.size.width, height: rect.size.height)
         return r
@@ -79,7 +75,7 @@ final class GDefaultClusterMarkerIconView: UIView {
     
     func setCount(count:Int) {
         self.count = count
-        let size = CGFloat(roundf(TBScaledValueForValue(Float(count), multiplier: 44.0)))
+        let size = CGFloat(roundf(GDefaultClusterMarkerIconView.TBScaledValueForValue(Float(count), multiplier: 44.0)))
         
         let newBounds = CGRect(x: 0, y: 0, width: size, height: size)
         frame = TBCenterRect(newBounds, center: self.center)
@@ -115,5 +111,10 @@ final class GDefaultClusterMarkerIconView: UIView {
         
         innerCircleFillColor.setFill()
         CGContextFillEllipseInRect(context, circleFrame)
+    }
+    
+    static func TBScaledValueForValue(value:Float, multiplier:Float) -> Float {
+        // Multiplier * (1/e^(-Alpha * X^(Beta)))
+        return multiplier * (1.0 / (1.0 + expf(-1 * TBScaleFactorAlpha * powf(value, TBScaleFactorBeta))))
     }
 }

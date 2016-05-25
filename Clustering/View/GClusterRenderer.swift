@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GoogleMaps
 
 protocol GClusterRenderer {
     func clustersChanged(clusters: NSSet)

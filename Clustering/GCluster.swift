@@ -13,5 +13,4 @@ import GoogleMaps
 protocol GCluster {
     var position: CLLocationCoordinate2D { get }
     var items: NSSet { get }
-    var marker: GMSMarker { get }
 }

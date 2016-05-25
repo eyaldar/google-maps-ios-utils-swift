@@ -36,19 +36,17 @@ class ViewController: UIViewController {
         _mapView.delegate = _clusterManager
         _clusterManager.delegate = self
         
-        for _ in 0...100000 {
-            let spot = generateSpot()
+        for id in 0...20000 {
+            let spot = generateSpot(id)
             _clusterManager.addItem(spot)
         }
     }
     
-    func generateSpot() -> Spot {
-        let marker = GMSMarker()
-        marker.title = "Test \(getRandomNumberBetween(1, max: 100))"
-        marker.position = CLLocationCoordinate2D(latitude: getRandomNumberBetween(51.38494009999999, max:51.6723432),
+    func generateSpot(id: Int) -> Spot {
+        let position = CLLocationCoordinate2D(latitude: getRandomNumberBetween(51.38494009999999, max:51.6723432),
                                                  longitude: getRandomNumberBetween(-0.3514683, max: 0.148271))
         
-        let spot = Spot(marker: marker, position: marker.position)
+        let spot = Spot(id: "\(id)", position: position)
         
         return spot
     }
@@ -64,4 +62,3 @@ extension ViewController: GMSMapViewDelegate {
         return true
     }
 }
-

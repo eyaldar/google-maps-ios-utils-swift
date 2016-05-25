@@ -13,16 +13,6 @@ import GoogleMaps
 class GStaticCluster: GCluster {
     private var _position: CLLocationCoordinate2D
     private var _items: Set<GQuadItem>
-    private var _marker: GMSMarker
-    
-    var marker: GMSMarker {
-        get {
-            return _marker
-        }
-        set {
-            _marker = newValue
-        }
-    }
     
     var items: NSSet {
         return _items
@@ -32,10 +22,9 @@ class GStaticCluster: GCluster {
         return _position
     }
     
-    init(coordinate: CLLocationCoordinate2D, marker: GMSMarker) {
+    init(coordinate: CLLocationCoordinate2D) {
         _position = coordinate
         _items = Set<GQuadItem>()
-        _marker = marker
     }
     
     func add(item: GQuadItem) {

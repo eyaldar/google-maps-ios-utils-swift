@@ -15,21 +15,11 @@ class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
     private var _point: GQTPoint
     private var _pointClass: QuadItemPoint
     private var _position: CLLocationCoordinate2D
-    private var _marker: GMSMarker
     
     /**
      * Controls whether this marker will be shown on map.
      */
     var hidden: Bool = false
-    
-    var marker: GMSMarker {
-        get {
-            return _marker
-        }
-        set {
-            _marker = newValue
-        }
-    }
     
     var items: NSSet {
         return NSSet(object: _item)
@@ -50,7 +40,6 @@ class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
         _point = projection.coordinateToPoint(_position)
         _pointClass = QuadItemPoint(x: _point.x, y: _point.y)
         _item = clusterItem
-        _marker = clusterItem.marker
     }
     
     func copyWithZone(zone: NSZone) -> AnyObject {
@@ -63,7 +52,7 @@ class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
     
     func isEqual(quadItem other: GQuadItem) -> Bool {
         
-        return _item.isEqual(other._item) &&
+        return _item.id == other._item.id &&
             _pointClass.x == other._pointClass.x &&
             _pointClass.y == other._pointClass.y
     }

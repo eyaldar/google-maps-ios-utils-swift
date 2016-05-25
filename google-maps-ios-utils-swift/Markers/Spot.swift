@@ -11,11 +11,11 @@ import Foundation
 import GoogleMaps
 
 class Spot: NSObject, GClusterItem {
+    let id: String
     var position: CLLocationCoordinate2D
-    var marker: GMSMarker
     
-    init(marker: GMSMarker, position: CLLocationCoordinate2D) {
+    init(id: String, position: CLLocationCoordinate2D) {
+        self.id = id
         self.position = position
-        self.marker = marker
     }
 }

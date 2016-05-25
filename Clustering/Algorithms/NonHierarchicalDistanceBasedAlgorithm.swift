@@ -88,7 +88,7 @@ final class NonHierarchicalDistanceBasedAlgorithm: GClusterAlgorithm {
                 continue
             }
             
-            let cluster = GStaticCluster(coordinate: candidate.position, marker: candidate.marker)
+            let cluster = GStaticCluster(coordinate: candidate.position)
             results.addObject(cluster)
             
             for clusterItem in clusterItems {

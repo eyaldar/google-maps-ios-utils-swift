@@ -14,6 +14,7 @@ final class GClusterManger: NSObject {
     private var _currentClusterId = 0
     private var _previousCameraPosition: GMSCameraPosition?
     weak var delegate: GMSMapViewDelegate?
+    
     var items: NSMutableArray?
     
     var mapView: GMSMapView {
