@@ -14,18 +14,23 @@ class NonHierarchicalDistanceBasedAlgorithm: GClusterAlgorithm {
     private var _maxDistanceAtZoom: Int
     
     var _items: Array<GQuadItem>
+    var _visibleItems: Array<GQuadItem>
     
     var items: Array<GQuadItem> {
         get {
             return _items
         }
-        set {
-            _items = []
+    }
+    
+    var visibleItems: Array<GQuadItem> {
+        get {
+            return _visibleItems
         }
     }
     
     init(maxDistanceAtZoom: Int) {
         _items = []
+        _visibleItems = []
         _quadTree = GQTPointQuadTree(bounds: GQTBounds(minX: 0, minY: 0, maxX: 1, maxY: 1))
         _maxDistanceAtZoom = maxDistanceAtZoom
     }
@@ -45,18 +50,16 @@ class NonHierarchicalDistanceBasedAlgorithm: GClusterAlgorithm {
         _quadTree.clear()
     }
     
-    func removeItemsNotInRectangle(rect: CGRect) {
-        var newItems = Array<GQuadItem>()
+    func removeItemsNotInBounds(bounds: GQTBounds) {
         _quadTree.clear()
+        _visibleItems.removeAll()
         
         for item in _items {
-            if rect.contains(CGPoint(x: item.position.latitude, y: item.position.longitude)) {
-                newItems.append(item)
+            if bounds.contains(GQTPoint(x: item.position.latitude, y: item.position.longitude)) {
+                _visibleItems.append(item)
                 _quadTree.add(item)
             }
         }
-        
-        _items = newItems
     }
     
     func getClusters(zoom: Double) -> NSSet {
@@ -67,7 +70,7 @@ class NonHierarchicalDistanceBasedAlgorithm: GClusterAlgorithm {
         var distanceToCluster = Dictionary<GQuadItem, Double>()
         var itemToCluster = Dictionary<GQuadItem, GStaticCluster>()
         
-        for candidate in _items {
+        for candidate in _visibleItems {
             if candidate.hidden || visitedCandidates.containsObject(candidate) {
                 // Candidate is hidden or already part of another cluster.
                 continue

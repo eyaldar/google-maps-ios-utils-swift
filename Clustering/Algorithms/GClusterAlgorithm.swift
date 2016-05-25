@@ -12,7 +12,7 @@ import UIKit
 protocol GClusterAlgorithm {
     func addItem(item: GClusterItem)
     func removeItems()
-    func removeItemsNotInRectangle(rect: CGRect)
+    func removeItemsNotInBounds(bounds: GQTBounds)
     
     func getClusters(zoom: Double) -> NSSet
 }

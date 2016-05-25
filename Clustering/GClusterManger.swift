@@ -47,13 +47,29 @@ class GClusterManger: NSObject {
         clusterAlgorithm.removeItems()
     }
     
-    func removeItemsNotInRectangle(rect: CGRect) {
-        clusterAlgorithm.removeItemsNotInRectangle(rect)
+    func removeItemsNotInBounds(bounds: GQTBounds) {
+        clusterAlgorithm.removeItemsNotInBounds(bounds)
     }
     
     func cluster() {
         let clusters = clusterAlgorithm.getClusters(Double(mapView.camera.zoom))
         clusterRenderer.clustersChanged(clusters)
+    }
+    
+    private func gmsBoundsToGQTBounds(gmsBounds: GMSCoordinateBounds) -> GQTBounds {
+        let minLat = gmsBounds.southWest.latitude
+        let minLong = gmsBounds.southWest.longitude
+        let maxLat = gmsBounds.northEast.latitude
+        let maxLong = gmsBounds.northEast.longitude
+        
+        return GQTBounds(minX: minLat, minY: minLong, maxX: maxLat, maxY: maxLong)
+    }
+    
+    private func removeItemsNotInVisibleRegion() {
+        let visibleRegion = mapView.projection.visibleRegion()
+        let gmsBounds = GMSCoordinateBounds(region: visibleRegion)
+        let visibleBounds = gmsBoundsToGQTBounds(gmsBounds)
+        self.removeItemsNotInBounds(visibleBounds)
     }
 }
 
@@ -80,6 +96,8 @@ extension GClusterManger: GMSMapViewDelegate {
         
         _previousCameraPosition = mapView.camera
         
+        
+        self.removeItemsNotInVisibleRegion()
         self.cluster()
         
         delegate?.mapView?(mapView, idleAtCameraPosition: position)
