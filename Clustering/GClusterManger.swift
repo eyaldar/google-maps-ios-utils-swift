@@ -122,6 +122,18 @@ extension GClusterManger: GMSMapViewDelegate {
         delegate?.mapView?(mapView, didTapAtCoordinate: coordinate)
     }
     
+    func mapView(mapView: GMSMapView, didCloseInfoWindowOfMarker marker: GMSMarker) {
+        delegate?.mapView?(mapView, didCloseInfoWindowOfMarker: marker)
+    }
+    
+    func mapView(mapView: GMSMapView, didBeginDraggingMarker marker: GMSMarker) {
+        delegate?.mapView?(mapView, didBeginDraggingMarker: marker)
+    }
+    
+    func mapView(mapView: GMSMapView, didLongPressInfoWindowOfMarker marker: GMSMarker) {
+        delegate?.mapView?(mapView, didLongPressInfoWindowOfMarker: marker)
+    }
+    
     func mapView(mapView: GMSMapView, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
         delegate?.mapView?(mapView, didLongPressAtCoordinate: coordinate)
     }
@@ -131,7 +143,7 @@ extension GClusterManger: GMSMapViewDelegate {
             return result
         }
         
-        return true
+        return false
     }
     
     func mapView(mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {

@@ -8,7 +8,6 @@
 
 import CoreLocation
 import Foundation
-import GoogleMaps
 
 class GStaticCluster: GCluster {
     private var _position: CLLocationCoordinate2D

@@ -8,7 +8,6 @@
 
 import CoreLocation
 import Foundation
-import GoogleMaps
 
 protocol GCluster {
     var position: CLLocationCoordinate2D { get }

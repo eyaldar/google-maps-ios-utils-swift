@@ -8,7 +8,6 @@
 
 import CoreLocation
 import Foundation
-import GoogleMaps
 
 class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
     private var _item: GClusterItem

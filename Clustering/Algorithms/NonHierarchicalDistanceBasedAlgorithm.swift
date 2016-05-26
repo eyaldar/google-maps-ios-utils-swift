@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import GoogleMaps
 
 final class NonHierarchicalDistanceBasedAlgorithm: GClusterAlgorithm {
     private var _quadTree: GQTPointQuadTree

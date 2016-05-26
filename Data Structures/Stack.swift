@@ -19,7 +19,7 @@ struct Stack<Element> {
         items.append(item)
     }
     mutating func pop() -> Element? {
-        if items.count > 0 {
+        if count > 0 {
             return items.removeLast()
         }
         

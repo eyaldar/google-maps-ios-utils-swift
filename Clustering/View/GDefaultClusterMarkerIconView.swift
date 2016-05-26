@@ -6,7 +6,6 @@
 //  Copyright © 2016 eyaldar. All rights reserved.
 //
 
-import GoogleMaps
 import UIKit
 
 final class GDefaultClusterMarkerIconView: UIView {
