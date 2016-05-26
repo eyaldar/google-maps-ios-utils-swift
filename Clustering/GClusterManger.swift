@@ -104,11 +104,13 @@ extension GClusterManger: GMSMapViewDelegate {
         
         // Don't recompute clusters if the map has just been panned/tilted/rotated.
         let pos = mapView.camera
-        if let previousCameraPosition = _previousCameraPosition where previousCameraPosition.zoom == pos.zoom {
-            if delegate != nil {
-                delegate?.mapView?(mapView, idleAtCameraPosition: position)
-                return
-            }
+        
+        if _previousCameraPosition?.target.latitude == pos.target.latitude &&
+           _previousCameraPosition?.target.longitude == pos.target.longitude {
+                if delegate != nil {
+                    delegate?.mapView?(mapView, idleAtCameraPosition: position)
+                    return
+                }
         }
         
         _previousCameraPosition = mapView.camera
