@@ -11,13 +11,13 @@ import GoogleMaps
 
 final class GDefaultClusterRenderer: GClusterRenderer {
     private let _mapView: GMSMapView
-    private var _markerCache: [GMSMarker]
+    private var _visibleMarkers: [GMSMarker]
     private var _markerStack: Stack<GMSMarker>
     
     init(mapView: GMSMapView) {
         _mapView = mapView
-        _markerCache = []
-        _markerStack = Stack<GMSMarker>()
+        _visibleMarkers = []
+        _markerStack = Stack<GMSMarker>(max: 64)
     }
     
     func clustersChanged(clusters: NSSet) {
@@ -29,7 +29,7 @@ final class GDefaultClusterRenderer: GClusterRenderer {
             }
             
             let marker = getMarker()
-            _markerCache.append(marker)
+            _visibleMarkers.append(marker)
             
             let count = cluster.items.count
             
@@ -71,12 +71,12 @@ final class GDefaultClusterRenderer: GClusterRenderer {
     }
     
     private func clearCaches() {
-        for marker in _markerCache {
+        for marker in _visibleMarkers {
             marker.map = nil
             
             _markerStack.push(marker)
         }
         
-        _markerCache.removeAll()
+        _visibleMarkers.removeAll()
     }
 }

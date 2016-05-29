@@ -9,13 +9,22 @@
 import Foundation
 
 struct Stack<Element> {
-    var items = [Element]()
+    private var max: Int
+    private var items = [Element]()
     
     var count: Int {
         return items.count
     }
     
+    init(max: Int = 64) {
+        self.max = max
+    }
+    
     mutating func push(item: Element) {
+        if count + 1 >= max {
+            pop()
+        }
+        
         items.append(item)
     }
     mutating func pop() -> Element? {
