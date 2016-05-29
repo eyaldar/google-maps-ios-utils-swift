@@ -7,12 +7,17 @@
 //
 
 import Foundation
+import GoogleMaps
 import UIKit
 
 protocol GClusterAlgorithm {
     func addItem(item: GClusterItem)
     func removeItems()
-    func removeItemsNotInBounds(bounds: GQTBounds)
+    func removeItemsNotInRectangle(bounds: GQTBounds)
+    func hideItemsNotInBounds(bounds: GMSCoordinateBounds)
     
+    func removeItem(item: GClusterItem)
+    func removeClusterItemsInSet(set: NSSet)
+    func containsItem(item: GClusterItem) -> Bool
     func getClusters(zoom: Double) -> NSSet
 }

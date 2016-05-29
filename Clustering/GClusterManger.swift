@@ -11,10 +11,10 @@ import GoogleMaps
 import UIKit
 
 final class GClusterManger: NSObject {
-    private var _currentClusterId = 0
     private var _previousCameraPosition: GMSCameraPosition?
     weak var delegate: GMSMapViewDelegate?
     
+    var isZoomDependent: Bool = false
     var items: NSMutableArray?
     
     var mapView: GMSMapView {
@@ -49,44 +49,25 @@ final class GClusterManger: NSObject {
         clusterAlgorithm.removeItems()
     }
     
-    func removeItemsNotInBounds(bounds: GQTBounds) {
-        clusterAlgorithm.removeItemsNotInBounds(bounds)
+    func removeItemsNotInRectangle(bounds: GQTBounds) {
+        clusterAlgorithm.removeItemsNotInRectangle(bounds)
+    }
+    
+    func hideItemsNotInBounds(bounds: GMSCoordinateBounds) {
+        clusterAlgorithm.hideItemsNotInBounds(bounds)
     }
     
     func cluster() {
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         let zoom = Double(mapView.camera.zoom)
-        let visibleBounds = translateMapViewVisibleBoundsToGQTBounds()
-        _currentClusterId += 1
-        let clusterId = _currentClusterId
         
         dispatch_async(dispatch_get_global_queue(priority, 0)) { [unowned self] in
-            self.removeItemsNotInBounds(visibleBounds)
             let clusters = self.clusterAlgorithm.getClusters(zoom)
             
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                if clusterId == self._currentClusterId {
-                    self.clusterRenderer.clustersChanged(clusters)
-                }
+                self.clusterRenderer.clustersChanged(clusters)
             }
         }
-    }
-    
-    private func gmsBoundsToGQTBounds(gmsBounds: GMSCoordinateBounds) -> GQTBounds {
-        let minLat = gmsBounds.southWest.latitude
-        let minLong = gmsBounds.southWest.longitude
-        let maxLat = gmsBounds.northEast.latitude
-        let maxLong = gmsBounds.northEast.longitude
-        
-        return GQTBounds(minX: minLat, minY: minLong, maxX: maxLat, maxY: maxLong)
-    }
-    
-    private func translateMapViewVisibleBoundsToGQTBounds() -> GQTBounds {
-        let visibleRegion = mapView.projection.visibleRegion()
-        let gmsBounds = GMSCoordinateBounds(region: visibleRegion)
-        let visibleBounds = gmsBoundsToGQTBounds(gmsBounds)
-        
-        return visibleBounds
     }
 }
 
@@ -95,12 +76,19 @@ extension GClusterManger: GMSMapViewDelegate {
         delegate?.mapView?(mapView, willMove: gesture)
     }
     
-    func mapView(mapView: GMSMapView, didChangeCameraPosition position: GMSCameraPosition) {
+    func mapView(mapView: GMSMapView, didChangeCameraPosition position: GMSCameraPosition) {  
         delegate?.mapView?(mapView, didChangeCameraPosition: position)
     }
     
     func mapView(mapView: GMSMapView, idleAtCameraPosition position: GMSCameraPosition) {
         assert(mapView == self.mapView)
+        
+        if isZoomDependent {
+            let visibleRegion = mapView.projection.visibleRegion()
+            let gmsBounds = GMSCoordinateBounds(region: visibleRegion)
+            
+            self.hideItemsNotInBounds(gmsBounds)
+        }
         
         // Don't recompute clusters if the map has just been panned/tilted/rotated.
         let pos = mapView.camera

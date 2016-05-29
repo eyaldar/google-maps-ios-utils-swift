@@ -9,7 +9,7 @@
 import CoreLocation
 import Foundation
 
-class GStaticCluster: GCluster {
+final class GStaticCluster: GCluster {
     private var _position: CLLocationCoordinate2D
     private var _items: Set<GQuadItem>
     
@@ -18,6 +18,10 @@ class GStaticCluster: GCluster {
     }
     
     var position: CLLocationCoordinate2D {
+        if let quadItem = _items.first where _items.count == 1 {
+            return quadItem.item.position
+        }
+        
         return _position
     }
     
@@ -33,5 +37,4 @@ class GStaticCluster: GCluster {
     func remove(item: GQuadItem) {
         _items.remove(item)
     }
-    
 }

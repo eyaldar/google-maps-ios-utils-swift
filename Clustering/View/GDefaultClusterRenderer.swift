@@ -40,7 +40,6 @@ final class GDefaultClusterRenderer: GClusterRenderer {
             }
             
             marker.position = cluster.position
-            marker.appearAnimation = kGMSMarkerAnimationPop
             marker.tracksViewChanges = false
             marker.map = _mapView
         }
@@ -65,6 +64,7 @@ final class GDefaultClusterRenderer: GClusterRenderer {
     private func createOrUpdateIconView(marker: GMSMarker, count: Int) {
         if let iconView = marker.iconView as? GDefaultClusterMarkerIconView {
             iconView.update(count)
+            marker.iconView = iconView
         } else {
             marker.iconView = generateClusterIconWithCount(count)
         }

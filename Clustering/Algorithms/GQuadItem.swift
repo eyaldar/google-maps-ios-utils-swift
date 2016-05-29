@@ -9,16 +9,23 @@
 import CoreLocation
 import Foundation
 
-class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
+final class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
     private var _item: GClusterItem
     private var _point: GQTPoint
-    private var _pointClass: QuadItemPoint
     private var _position: CLLocationCoordinate2D
     
     /**
      * Controls whether this marker will be shown on map.
      */
     var hidden: Bool = false
+    
+    var id: String {
+        return _item.id
+    }
+    
+    var item: GClusterItem {
+        return _item
+    }
     
     var items: NSSet {
         return NSSet(object: _item)
@@ -37,7 +44,6 @@ class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
         
         _position = clusterItem.position
         _point = projection.coordinateToPoint(_position)
-        _pointClass = QuadItemPoint(x: _point.x, y: _point.y)
         _item = clusterItem
     }
     
@@ -49,19 +55,16 @@ class GQuadItem: NSObject, GCluster, GQTPointQuadTreeItem, NSCopying {
         return newGQuadItem
     }
     
-    func isEqual(quadItem other: GQuadItem) -> Bool {
-        
-        return _item.id == other._item.id &&
-            _pointClass.x == other._pointClass.x &&
-            _pointClass.y == other._pointClass.y
-    }
-    
     override func isEqual(other: AnyObject?) -> Bool {
+        if self === other {
+            return true
+        }
+        
         guard let `other` = other as? GQuadItem else {
             return false
         }
         
-        return self.isEqual(quadItem: other)
+        return self._item.isEqual(other._item)
     }
     
     override var hash: Int {

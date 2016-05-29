@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         _clusterManager = GClusterManger(mapView: _mapView,
                                          algorithm: NonHierarchicalDistanceBasedAlgorithm(),
                                          renderer: GDefaultClusterRenderer(mapView: _mapView))
+        _clusterManager.isZoomDependent = true
         
         _mapView.delegate = _clusterManager
         _clusterManager.delegate = self
@@ -42,7 +43,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func generateSpot(id: Int) -> Spot {
+    private func generateSpot(id: Int) -> Spot {
         let position = CLLocationCoordinate2D(latitude: getRandomNumberBetween(51.38494009999999, max:51.6723432),
                                                  longitude: getRandomNumberBetween(-0.3514683, max: 0.148271))
         
@@ -51,7 +52,7 @@ class ViewController: UIViewController {
         return spot
     }
     
-    func getRandomNumberBetween(min: Double, max: Double) -> Double {
+    private func getRandomNumberBetween(min: Double, max: Double) -> Double {
         return min + (max - min) * drand48()
     }
 }
